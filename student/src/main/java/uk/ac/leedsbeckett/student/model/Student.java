@@ -17,7 +17,8 @@ public class Student{
     @Column(unique = true)
     private String externalStudentId;
     private String Surname;
-    private String FirstName;
+    private String Firstname;
+    private String financeAccount;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "course_student",

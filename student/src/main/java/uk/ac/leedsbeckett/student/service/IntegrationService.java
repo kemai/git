@@ -11,7 +11,10 @@ import java.nio.channels.AcceptPendingException;
 public class IntegrationService {
 
     private final RestTemplate restTemplate;
-    private String url_database = "http://localhost:8081/accounts/student/";
+    private String url_student = "http://localhost:8081/accounts/student/";
+    private String url_invoice = "http://localhost:8081/invoices/";
+
+    private String url_account = "http://localhost:8081/accounts/";
 
 
     public IntegrationService(RestTemplate restTemplate) {
@@ -19,11 +22,16 @@ public class IntegrationService {
     }
 
     public Account getStudentAccount(String studentId){
-        return restTemplate.getForObject(url_database + studentId, Account.class);
+        return restTemplate.getForObject(url_student + studentId, Account.class);
+    }
+
+    public Account createStudentAccount(Account account){
+        return restTemplate.postForObject(url_account,account,Account.class);
+
     }
 
     public Invoice createCourseFeeInvoice(Invoice invoice){
-        return restTemplate.postForObject(url_database,invoice, Invoice.class);
+        return restTemplate.postForObject(url_invoice, invoice, Invoice.class);
     }
 
 }
